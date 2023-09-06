@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Database>
+	<Doctors>
+		<LastId>0</LastId>
+		<Path></Path>
+	</Doctors>
+	<Patients>
+		<LastId>0</LastId>
+		<Path></Path>
+	</Patients>
+	<Appointments>
+		<LastId>0</LastId>
+		<Path></Path>
+	</Appointments>
+</Database>
