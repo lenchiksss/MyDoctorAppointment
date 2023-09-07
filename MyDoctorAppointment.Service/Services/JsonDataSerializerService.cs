@@ -10,7 +10,7 @@ namespace MyDoctorAppointment.Service.Services
 {
     public class JsonDataSerializerService : ISerializationService
     {
-        public void Serialize<T>(T data, string filePath)
+        public void Serialize<T>(string filePath, T data) 
         {
             var json = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(filePath, json);

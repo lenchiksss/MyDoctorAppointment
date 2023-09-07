@@ -10,7 +10,7 @@ namespace MyDoctorAppointment.Service.Services
 {
     public class XmlDataSerializerService : ISerializationService
     {
-        public void Serialize<T>(T data, string filePath)
+        public void Serialize<T>(string filePath, T data)
         {
             var serializer = new XmlSerializer(typeof(T));
             using (var writer = new StreamWriter(filePath))

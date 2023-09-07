@@ -11,7 +11,7 @@ namespace MyDoctorAppointment.Data.Repositories
 {
     public class DoctorRepository : GenericRepository<Doctor>, IDoctorRepository
     {
-        private readonly ISerializationService _serializationService;
+        private readonly ISerializationService serializationService;
 
         public DoctorRepository(string appSettings, ISerializationService serializationService) : base(appSettings, serializationService)
         {
@@ -20,25 +20,16 @@ namespace MyDoctorAppointment.Data.Repositories
             Path = result.Database.Doctors.Path;
             LastId = result.Database.Doctors.LastId;
 
-            _serializationService = serializationService;
+            this.serializationService = serializationService;
         }
 
         public override string Path { get; set; }
 
         public override int LastId { get; set; }
 
-        public override void ShowInfo(Doctor doctor)
+        public override void ShowInfo(Doctor source)
         {
-            if (doctor != null)
-            {
-                Console.WriteLine("Id: " + doctor.Id + "; name: " + doctor.Name + "; surname: " + doctor.Surname
-                + "; email: " + doctor.Email + "; phone: " + doctor.Phone
-                + "; type: " + doctor.DoctorType + "; experiance: " + doctor.Experience);
-            }
-            else
-            {
-                throw new ArgumentNullException(nameof(doctor) + " can't be null");
-            }
+            Console.WriteLine();
         }
 
         protected override void SaveLastId()

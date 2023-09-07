@@ -9,12 +9,15 @@ namespace MyDoctorAppointment
     public class DoctorAppointment
     {
         private readonly IDoctorService doctorService;
-        //private readonly ISerializationService serializationService;
+        private readonly ISerializationService serializationService;
+        private readonly string appSettingsPath;
+
 
         public DoctorAppointment(string appSettings, ISerializationService serializationService)
         {
-            doctorService = new DoctorService(appSettings, serializationService);
-            //this.serializationService = serializationService;
+            doctorService = new DoctorService(appSettingsPath, serializationService);
+            this.serializationService = serializationService;
+            this.appSettingsPath = appSettingsPath;
         }
 
         public void Menu()
@@ -58,17 +61,23 @@ namespace MyDoctorAppointment
             Console.WriteLine("2. JSON");
 
             string choice = Console.ReadLine();
+            ISerializationService serializationService = null;
+            string appSettingsPath = "";
 
             //ISerializationService serializationService;
-            DoctorAppointment doctorAppointment = null;
+            //DoctorAppointment doctorAppointment = null;
 
             if (choice.Equals("1"))
             {
-                doctorAppointment = new DoctorAppointment(Constants.XmlAppSettingsPath, new XmlDataSerializerService());
+                serializationService = new XmlDataSerializerService();
+                appSettingsPath = Constants.XmlAppSettingsPath;
+                //doctorAppointment = new DoctorAppointment(Constants.XmlAppSettingsPath, new XmlDataSerializerService());
             }
             else if (choice.Equals("2"))
             {
-                doctorAppointment = new DoctorAppointment(Constants.JsonAppSettingsPath, new JsonDataSerializerService());
+                serializationService = new JsonDataSerializerService();
+                appSettingsPath = Constants.JsonAppSettingsPath;
+                //doctorAppointment = new DoctorAppointment(Constants.JsonAppSettingsPath, new JsonDataSerializerService());
             }
             else
             {
@@ -76,6 +85,7 @@ namespace MyDoctorAppointment
                 return;
             }
 
+            DoctorAppointment doctorAppointment = new DoctorAppointment(appSettingsPath, serializationService);
             doctorAppointment.Menu();
         }
     }

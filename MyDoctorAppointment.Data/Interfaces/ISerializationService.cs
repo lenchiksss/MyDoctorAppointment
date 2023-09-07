@@ -8,7 +8,7 @@ namespace MyDoctorAppointment.Data.Interfaces
 {
     public interface ISerializationService
     {
-        void Serialize<T>(T data, string filePath);
+        void Serialize<T>(string filePath, T data);
 
         T Deserialize<T>(string filePath);
     }

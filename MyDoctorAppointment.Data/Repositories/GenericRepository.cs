@@ -15,12 +15,12 @@ namespace MyDoctorAppointment.Data.Repositories
     {
         public string appSettings { get; private set; }
 
-        public ISerializationService serializationService { get; private set; }
+        public ISerializationService SerializationService { get; private set; }
 
         public GenericRepository(string appSettings, ISerializationService serializationService)
         {
             this.appSettings = appSettings;
-            this.serializationService = serializationService;
+            SerializationService = serializationService;
         }
 
         public abstract string Path { get; set; }
@@ -32,8 +32,7 @@ namespace MyDoctorAppointment.Data.Repositories
             source.Id = ++LastId;
             source.CreatedAt = DateTime.Now;
 
-            var data = GetAll().Append(source).ToList();
-            serializationService.Serialize(data, Path);
+            SerializationService.Serialize(Path, GetAll().Append(source));
 
             //File.WriteAllText(Path, JsonConvert.SerializeObject(GetAll().Append(source), Formatting.Indented));
             SaveLastId();
@@ -48,8 +47,7 @@ namespace MyDoctorAppointment.Data.Repositories
                 return false;
             }
 
-            var data = GetAll().Where(x => x.Id != id).ToList();
-            serializationService.Serialize(data, Path);
+            SerializationService.Serialize(Path, GetAll().Where(x => x.Id != id));
 
             //File.WriteAllText(Path, JsonConvert.SerializeObject(GetAll().Where(x => x.Id != id), Formatting.Indented));
 
@@ -58,19 +56,15 @@ namespace MyDoctorAppointment.Data.Repositories
 
         public IEnumerable<TSource> GetAll()
         {
-            if (!File.Exists(Path))
-            {
-                return new List<TSource>();
-            }
-
-            return serializationService.Deserialize<List<TSource>>(Path) ?? new List<TSource>();
+            //if (!File.Exists(Path))
+            //{
+            //    return new List<TSource>();
+            //}
 
             //if (!File.Exists(Path))
             //{
             //    File.WriteAllText(Path, "[]");
             //}
-
-            //return serializationService.Deserialize(Path);
 
             //var json = File.ReadAllText(Path);
 
@@ -80,7 +74,11 @@ namespace MyDoctorAppointment.Data.Repositories
             //    json = "[]";
             //}
 
+            //return serializationService.Deserialize<List<TSource>>(Path) ?? new List<TSource>();
+
             //return JsonConvert.DeserializeObject<List<TSource>>(json)!;
+
+            return SerializationService.Deserialize<List<TSource>>(Path);
         }
 
         public TSource? GetById(int id)
@@ -93,10 +91,12 @@ namespace MyDoctorAppointment.Data.Repositories
             source.UpdatedAt = DateTime.Now;
             source.Id = id;
 
-            var data = GetAll().Select(x => x.Id == id ? source : x).ToList();
-            serializationService.Serialize(data, Path);
+            //var data = GetAll().Select(x => x.Id == id ? source : x).ToList();
+            //serializationService.Serialize(data, Path);
 
             //File.WriteAllText(Path, JsonConvert.SerializeObject(GetAll().Select(x => x.Id == id ? source : x), Formatting.Indented));
+
+            SerializationService.Serialize(Path, GetAll().Select(x => x.Id == id ? source : x));
 
             return source;
         }
@@ -105,6 +105,33 @@ namespace MyDoctorAppointment.Data.Repositories
 
         protected abstract void SaveLastId();
 
-        protected dynamic ReadFromAppSettings() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.JsonAppSettingsPath));
+        protected dynamic ReadFromAppSettings(string appSettingsPath)
+        {
+            try
+            {
+                string jsonOrXml = File.ReadAllText(appSettingsPath);
+
+                if (appSettingsPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                {
+                    return SerializationService.Deserialize<dynamic>(appSettingsPath);
+                }
+                else if (appSettingsPath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
+                {
+                    return SerializationService.Deserialize<dynamic>(appSettingsPath);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unsupported file format. Only JSON and XML are supported.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately
+                Console.WriteLine("Error reading app settings: " + ex.Message);
+                return null; // Or throw an exception or return a default value
+            }
+        }
+
+        //protected dynamic ReadFromAppSettings() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.XmlAppSettingsPath));
     }
 }
