@@ -13,14 +13,14 @@ namespace MyDoctorAppointment.Data.Repositories
     {
         private readonly ISerializationService serializationService;
 
-        public DoctorRepository(string appSettings, ISerializationService serializationService) : base(appSettings, serializationService)
+        public DoctorRepository(string appSettingsPath, ISerializationService serializationService) : base(appSettingsPath, serializationService)
         {
-            dynamic result = ReadFromAppSettings();
+            this.serializationService = serializationService;
+
+            var result = ReadFromAppSettings(appSettingsPath);
 
             Path = result.Database.Doctors.Path;
             LastId = result.Database.Doctors.LastId;
-
-            this.serializationService = serializationService;
         }
 
         public override string Path { get; set; }
@@ -34,7 +34,8 @@ namespace MyDoctorAppointment.Data.Repositories
 
         protected override void SaveLastId()
         {
-            dynamic result = ReadFromAppSettings();
+            dynamic result = ReadFromAppSettings(appSettings);
+
             result.Database.Doctors.LastId = LastId;
 
             serializationService.Serialize(appSettings, result);

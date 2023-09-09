@@ -3,7 +3,7 @@
 <Database>
 	<Doctors>
 		<LastId>0</LastId>
-		<Path>E:\projects\MyDoctorAppointment\MyDoctorAppointment.Data\MockedDatabase\appointments.xml</Path>
+		<Path>E:\projects\MyDoctorAppointment\MyDoctorAppointment.Data\MockedDatabase\doctors.xml</Path>
 	</Doctors>
 	<Patients>
 		<LastId>0</LastId>

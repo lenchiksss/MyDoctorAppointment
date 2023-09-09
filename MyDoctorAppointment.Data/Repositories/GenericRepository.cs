@@ -8,24 +8,25 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace MyDoctorAppointment.Data.Repositories
 {
     public abstract class GenericRepository<TSource> : IGenericRepository<TSource> where TSource : Auditable
     {
         public string appSettings { get; private set; }
-
+       
         public ISerializationService SerializationService { get; private set; }
+
+        public abstract string Path { get; set; }
+
+        public abstract int LastId { get; set; }
 
         public GenericRepository(string appSettings, ISerializationService serializationService)
         {
             this.appSettings = appSettings;
             SerializationService = serializationService;
         }
-
-        public abstract string Path { get; set; }
-
-        public abstract int LastId { get; set; }
 
         public TSource Create(TSource source)
         {
@@ -56,23 +57,23 @@ namespace MyDoctorAppointment.Data.Repositories
 
         public IEnumerable<TSource> GetAll()
         {
-            //if (!File.Exists(Path))
-            //{
-            //    return new List<TSource>();
-            //}
+            if (!File.Exists(Path))
+            {
+                return new List<TSource>();
+            }
 
-            //if (!File.Exists(Path))
-            //{
-            //    File.WriteAllText(Path, "[]");
-            //}
+            if (!File.Exists(Path))
+            {
+                File.WriteAllText(Path, "[]");
+            }
 
-            //var json = File.ReadAllText(Path);
+            var file = File.ReadAllText(Path);
 
-            //if (string.IsNullOrWhiteSpace(json))
-            //{
-            //    File.WriteAllText(Path, "[]");
-            //    json = "[]";
-            //}
+            if (string.IsNullOrWhiteSpace(file))
+            {
+                File.WriteAllText(Path, "[]");
+                file = "[]";
+            }
 
             //return serializationService.Deserialize<List<TSource>>(Path) ?? new List<TSource>();
 
@@ -126,12 +127,11 @@ namespace MyDoctorAppointment.Data.Repositories
             }
             catch (Exception ex)
             {
-                // Handle exceptions appropriately
                 Console.WriteLine("Error reading app settings: " + ex.Message);
-                return null; // Or throw an exception or return a default value
+                return null;
             }
         }
 
-        //protected dynamic ReadFromAppSettings() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.XmlAppSettingsPath));
+        //protected dynamic ReadFromAppSettingsJson() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.JsonAppSettingsPath));
     }
 }

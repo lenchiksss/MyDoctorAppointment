@@ -1,6 +1,7 @@
 ﻿using MyDoctorAppointment.Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,19 +13,21 @@ namespace MyDoctorAppointment.Service.Services
     {
         public void Serialize<T>(string filePath, T data)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            using (var writer = new StreamWriter(filePath))
+            XmlSerializer result = new XmlSerializer(typeof(T));
+
+            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                serializer.Serialize(writer, data);
+                result.Serialize(fs, data);
             }
         }
 
         public T Deserialize<T>(string filePath)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            using (var reader = new StreamReader(filePath))
+            XmlSerializer result = new XmlSerializer(typeof(T));
+
+            using (FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                return (T)serializer.Deserialize(reader);
+                return (T)result.Deserialize(stream);
             }
         }
     }

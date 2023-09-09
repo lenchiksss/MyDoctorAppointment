@@ -12,8 +12,7 @@ namespace MyDoctorAppointment
         private readonly ISerializationService serializationService;
         private readonly string appSettingsPath;
 
-
-        public DoctorAppointment(string appSettings, ISerializationService serializationService)
+        public DoctorAppointment(string appSettingsPath, ISerializationService serializationService)
         {
             doctorService = new DoctorService(appSettingsPath, serializationService);
             this.serializationService = serializationService;
