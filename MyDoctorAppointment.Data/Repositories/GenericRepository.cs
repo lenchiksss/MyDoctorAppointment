@@ -106,30 +106,9 @@ namespace MyDoctorAppointment.Data.Repositories
 
         protected abstract void SaveLastId();
 
-        protected dynamic ReadFromAppSettings(string appSettingsPath)
+        protected Repository ReadFromAppSettings(string appSettingsPath)
         {
-            try
-            {
-                string jsonOrXml = File.ReadAllText(appSettingsPath);
-
-                if (appSettingsPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
-                {
-                    return SerializationService.Deserialize<dynamic>(appSettingsPath);
-                }
-                else if (appSettingsPath.EndsWith(".xml", StringComparison.OrdinalIgnoreCase))
-                {
-                    return SerializationService.Deserialize<dynamic>(appSettingsPath);
-                }
-                else
-                {
-                    throw new InvalidOperationException("Unsupported file format. Only JSON and XML are supported.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error reading app settings: " + ex.Message);
-                return null;
-            }
+            return SerializationService.Deserialize<Repository>(appSettings);
         }
 
         //protected dynamic ReadFromAppSettingsJson() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.JsonAppSettingsPath));
