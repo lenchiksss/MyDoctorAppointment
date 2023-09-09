@@ -2,8 +2,8 @@
 {
     public interface ISerializationService
     {
-        void Serialize<T>(string filePath, T data);
+        void Serialize<T>(string path, T data);
 
-        T Deserialize<T>(string filePath);
+        T Deserialize<T>(string path);
     }
 }

@@ -10,16 +10,15 @@ namespace MyDoctorAppointment.Service.Services
 {
     public class JsonDataSerializerService : ISerializationService
     {
-        public void Serialize<T>(string filePath, T data) 
+        public T Deserialize<T>(string path)
         {
-            var json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText(filePath, json);
+            var json = File.ReadAllText(path);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public T Deserialize<T>(string filePath)
+        public void Serialize<T>(string path, T data)
         {
-            var json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<T>(json);
+            File.WriteAllText(path, JsonConvert.SerializeObject(data, Formatting.Indented));
         }
     }
 }

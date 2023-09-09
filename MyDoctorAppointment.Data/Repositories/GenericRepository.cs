@@ -106,7 +106,7 @@ namespace MyDoctorAppointment.Data.Repositories
 
         protected abstract void SaveLastId();
 
-        protected Repository ReadFromAppSettings(string appSettingsPath)
+        protected Repository ReadFromAppSettings()
         {
             return SerializationService.Deserialize<Repository>(appSettings);
         }

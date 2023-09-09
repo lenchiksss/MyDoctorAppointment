@@ -11,24 +11,20 @@ namespace MyDoctorAppointment.Service.Services
 {
     public class XmlDataSerializerService : ISerializationService
     {
-        public void Serialize<T>(string filePath, T data)
+        public T Deserialize<T>(string path)
         {
-            XmlSerializer result = new XmlSerializer(typeof(T));
+            XmlSerializer serializer = new(typeof(T));
 
-            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
-            {
-                result.Serialize(fs, data);
-            }
+            using FileStream stream = new(path, FileMode.OpenOrCreate);
+            return (T)serializer.Deserialize(stream);
         }
 
-        public T Deserialize<T>(string filePath)
+        public void Serialize<T>(string path, T data)
         {
-            XmlSerializer result = new XmlSerializer(typeof(T));
+            XmlSerializer serializer = new XmlSerializer(typeof(T));
 
-            using (FileStream stream = new FileStream(filePath, FileMode.OpenOrCreate))
-            {
-                return (T)result.Deserialize(stream);
-            }
+            using FileStream fs = new(path, FileMode.OpenOrCreate);
+            serializer.Serialize(fs, data);
         }
     }
 }
