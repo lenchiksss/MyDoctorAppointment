@@ -1,16 +1,65 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
-<ArrayOfDoctor>
-	<Doctor>
-		<DoctorType>Dentist</DoctorType>
-		<Experience>20</Experience>
-		<Salary>0.0</Salary>
-		<Name>Vasya</Name>
-		<Surname>Petrov</Surname>
-		<Phone />
-		<Email />
-		<Id>2</Id>
-		<CreatedAt>2023-09-10T12:53:21.8815896+03:00</CreatedAt>
-		<UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
-	</Doctor>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDoctor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Doctor>
+    <Id>2</Id>
+    <CreatedAt>2023-09-10T12:53:21.8815896+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <Phone />
+    <Email />
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0.0</Salary>
+  </Doctor>
+  <Doctor>
+    <Id>1</Id>
+    <CreatedAt>2023-09-10T19:37:44.8689541+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0</Salary>
+  </Doctor>
+  <Doctor>
+    <Id>2</Id>
+    <CreatedAt>2023-09-10T19:39:42.9125527+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0</Salary>
+  </Doctor>
+  <Doctor>
+    <Id>3</Id>
+    <CreatedAt>2023-09-10T19:40:17.2918746+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0</Salary>
+  </Doctor>
+  <Doctor>
+    <Id>4</Id>
+    <CreatedAt>2023-09-10T19:41:46.8863836+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0</Salary>
+  </Doctor>
+  <Doctor>
+    <Id>5</Id>
+    <CreatedAt>2023-09-10T19:43:21.2273132+03:00</CreatedAt>
+    <UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+    <Name>Vasya</Name>
+    <Surname>Petrov</Surname>
+    <DoctorType>Dentist</DoctorType>
+    <Experience>20</Experience>
+    <Salary>0</Salary>
+  </Doctor>
 </ArrayOfDoctor>

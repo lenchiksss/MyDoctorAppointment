@@ -33,7 +33,9 @@ namespace MyDoctorAppointment.Data.Repositories
             source.Id = ++LastId;
             source.CreatedAt = DateTime.Now;
 
-            SerializationService.Serialize(Path, GetAll().Append(source));
+            var doctors = GetAll().Append(source).ToList();
+
+            SerializationService.Serialize(Path, doctors);
 
             //File.WriteAllText(Path, JsonConvert.SerializeObject(GetAll().Append(source), Formatting.Indented));
             SaveLastId();
