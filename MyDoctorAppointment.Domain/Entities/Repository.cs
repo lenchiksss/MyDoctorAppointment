@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace MyDoctorAppointment.Domain.Entities
 {
+    public class Repository
+    {
+        public Database Database { get; set; }
+    }
+
     public class Database
     {
         public Doctors Doctors { get; set; }
@@ -29,10 +34,5 @@ namespace MyDoctorAppointment.Domain.Entities
     {
         public int LastId { get; set; }
         public string Path { get; set; }
-    }
-
-    public class Repository
-    {
-        public Database Database { get; set; }
     }
 }

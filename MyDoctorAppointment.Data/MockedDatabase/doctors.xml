@@ -1,4 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+
 <ArrayOfDoctor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	
+	<Doctor>
+		<DoctorType>Dentist</DoctorType>
+		<Experience>20</Experience>
+		<Salary>0.0</Salary>
+		<Name>Vasya</Name>
+		<Surname>Petrov</Surname>
+		<Phone />
+		<Email />
+		<Id>2</Id>
+		<CreatedAt>2023-09-10T12:53:21.8815896+03:00</CreatedAt>
+		<UpdatedAt>0001-01-01T00:00:00</UpdatedAt>
+	</Doctor>
 </ArrayOfDoctor>

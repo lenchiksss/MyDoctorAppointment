@@ -14,7 +14,7 @@ namespace MyDoctorAppointment.Data.Repositories
 {
     public abstract class GenericRepository<TSource> : IGenericRepository<TSource> where TSource : Auditable
     {
-        public string appSettings { get; private set; }
+        public string AppSettings { get; private set; }
        
         public ISerializationService SerializationService { get; private set; }
 
@@ -24,7 +24,7 @@ namespace MyDoctorAppointment.Data.Repositories
 
         public GenericRepository(string appSettings, ISerializationService serializationService)
         {
-            this.appSettings = appSettings;
+            AppSettings = appSettings;
             SerializationService = serializationService;
         }
 
@@ -57,23 +57,23 @@ namespace MyDoctorAppointment.Data.Repositories
 
         public IEnumerable<TSource> GetAll()
         {
-            if (!File.Exists(Path))
-            {
-                return new List<TSource>();
-            }
+            //if (!File.Exists(Path))
+            //{
+            //    return new List<TSource>();
+            //}
 
-            if (!File.Exists(Path))
-            {
-                File.WriteAllText(Path, "[]");
-            }
+            //if (!File.Exists(Path))
+            //{
+            //    File.WriteAllText(Path, "[]");
+            //}
 
-            var file = File.ReadAllText(Path);
+            //var file = File.ReadAllText(Path);
 
-            if (string.IsNullOrWhiteSpace(file))
-            {
-                File.WriteAllText(Path, "[]");
-                file = "[]";
-            }
+            //if (string.IsNullOrWhiteSpace(file))
+            //{
+            //    File.WriteAllText(Path, "[]");
+            //    file = "[]";
+            //}
 
             //return serializationService.Deserialize<List<TSource>>(Path) ?? new List<TSource>();
 
@@ -108,7 +108,7 @@ namespace MyDoctorAppointment.Data.Repositories
 
         protected Repository ReadFromAppSettings()
         {
-            return SerializationService.Deserialize<Repository>(appSettings);
+            return SerializationService.Deserialize<Repository>(AppSettings);
         }
 
         //protected dynamic ReadFromAppSettingsJson() => JsonConvert.DeserializeObject<dynamic>(File.ReadAllText(Constants.JsonAppSettingsPath));
