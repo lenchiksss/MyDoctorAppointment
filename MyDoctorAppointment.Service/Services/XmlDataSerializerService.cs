@@ -19,9 +19,9 @@ namespace MyDoctorAppointment.Service.Services
         {
             XmlSerializer formatter = new XmlSerializer(typeof(T));
 
-            using (var stream = new System.IO.StreamWriter(path))
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
             {
-                formatter.Serialize(stream, data);
+                formatter.Serialize(fs, data);
             }
         }
     }

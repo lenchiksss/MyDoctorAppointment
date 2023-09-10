@@ -10,5 +10,17 @@
     "Id": 2,
     "CreatedAt": "2023-09-10T12:53:21.8815896+03:00",
     "UpdatedAt": "0001-01-01T00:00:00"
+  },
+  {
+    "DoctorType": 1,
+    "Experience": 20,
+    "Salary": 0.0,
+    "Name": "Vasya",
+    "Surname": "Petrov",
+    "Phone": null,
+    "Email": null,
+    "Id": 3,
+    "CreatedAt": "2023-09-10T16:37:01.8378105+03:00",
+    "UpdatedAt": "0001-01-01T00:00:00"
   }
 ]
